@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-do
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Home from './pages/Home'
+import Strengths from './pages/Strengths'
+import Weaknesses from './pages/Weaknesses'
 import { ArrowLeft, Clock, Info } from 'lucide-react'
 
 // ScrollToTop on route change
@@ -15,7 +17,7 @@ function ScrollToTop() {
 }
 
 /**
- * Dark Poster Placeholder Component for Routes belonging to Person 2 and Person 3.
+ * Dark Poster Placeholder Component for Routes belonging to Person 2 and Person 3 that are not yet implemented.
  * Kept inline inside App.jsx to avoid modifying or creating external files owned by other teammates.
  */
 function RoutePlaceholder({ title, category, owner, description }) {
@@ -74,29 +76,11 @@ export default function App() {
             {/* Person 1 Main Page */}
             <Route path="/" element={<Home />} />
 
-            {/* Person 2 Pages (Placeholders) */}
-            <Route
-              path="/strengths"
-              element={
-                <RoutePlaceholder
-                  title="KEKUATAN (STRENGTHS)"
-                  category="01 / FAKTOR INTERNAL POSITIF"
-                  owner="Person 2 (Strengths.jsx)"
-                  description="Kajian terperinci mengenai modal geostrategis, keanekaragaman hayati, dan bonus demografi Indonesia."
-                />
-              }
-            />
-            <Route
-              path="/weaknesses"
-              element={
-                <RoutePlaceholder
-                  title="KELEMAHAN (WEAKNESSES)"
-                  category="02 / FAKTOR INTERNAL NEGATIF"
-                  owner="Person 2 (Weaknesses.jsx)"
-                  description="Kajian terperinci mengenai disparitas wilayah, tantangan kualitas SDM, serta tata kelola institusi."
-                />
-              }
-            />
+            {/* Person 2 Pages (Active) */}
+            <Route path="/strengths" element={<Strengths />} />
+            <Route path="/weaknesses" element={<Weaknesses />} />
+
+            {/* Person 2 / 3 Placeholders (Until Implemented) */}
             <Route
               path="/sources"
               element={
@@ -108,8 +92,6 @@ export default function App() {
                 />
               }
             />
-
-            {/* Person 3 Pages (Placeholders) */}
             <Route
               path="/opportunities"
               element={
