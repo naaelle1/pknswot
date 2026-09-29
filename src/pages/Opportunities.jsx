@@ -1,151 +1,81 @@
-import { motion } from "framer-motion";
-import opportunities from "../data/opportunities";
+import React from 'react';
+import { motion } from 'framer-motion';
+import opportunities from '../data/opportunities';
+import TopicCard from '../components/swot/TopicCard';
+import AnalysisNav from '../components/swot/AnalysisNav';
 
-function Opportunities() {
+const Opportunities = () => {
+  // Map the local opportunities data structure to match what TopicCard expects
+  const mappedOpportunities = opportunities.map((item) => {
+    let sourceName = "Sumber Eksternal";
+    try {
+      sourceName = new URL(item.source).hostname.replace('www.', '');
+    } catch (e) { }
+
+    return {
+      id: parseInt(item.number, 10),
+      title: item.title,
+      description: item.description,
+      past: {
+        title: item.past.title,
+        description: item.past.text
+      },
+      present: {
+        title: item.present.title,
+        description: item.present.text
+      },
+      sources: [
+        {
+          name: sourceName.toUpperCase(),
+          url: item.source
+        }
+      ]
+    };
+  });
+
   return (
-    <main className="bg-[#111111] text-[#F4EFE5] min-h-screen">
+    <div className="min-h-screen bg-[#111111] text-[#F4EFE5] pt-32 pb-32">
+      <div className="editorial-container">
 
-      {/* HERO */}
-      <section className="px-6 md:px-12 lg:px-20 pt-32 pb-24 border-b border-[#F4EFE5]/20">
-        <div className="max-w-7xl mx-auto">
+        <AnalysisNav />
 
-          <p className="text-[#F0442E] font-mono text-sm tracking-widest mb-6">
-            SWOT / 03
-          </p>
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="mb-32 md:mb-48 relative"
+        >
+          {/* Decorative background element */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#F0442E] opacity-[0.03] rounded-full blur-[100px] pointer-events-none"></div>
 
-          <h1 className="font-['Bebas_Neue'] text-[clamp(5rem,15vw,13rem)] leading-[0.8] uppercase">
-            Opportunities
-          </h1>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mt-16">
-            <div className="md:col-span-5">
-              <p className="text-2xl md:text-3xl leading-tight">
-                Peluang Indonesia lahir dari potensi yang dimiliki dan
-                kemampuan untuk mengubahnya menjadi nilai di masa depan.
-              </p>
+          <div className="flex flex-col gap-12 lg:gap-16 relative z-10 border-b border-zinc-800/50 pb-16">
+            <div className="w-full">
+              <h4 className="text-[#F0442E] font-bold tracking-[0.4em] text-sm md:text-base uppercase mb-6 md:mb-10">
+                Analisis Eksternal
+              </h4>
+              <h1 className="font-display text-[4.5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] xl:text-[13rem] 2xl:text-[14rem] leading-[0.75] uppercase text-white -ml-2">
+                OPPORTUNITIES
+              </h1>
             </div>
-
-            <div className="md:col-span-4 md:col-start-8">
-              <p className="text-[#9A968E] leading-relaxed">
-                Dari ekonomi, teknologi, pariwisata hingga sumber daya alam,
-                berbagai peluang dapat menjadi kekuatan untuk membangun
-                Indonesia yang lebih maju.
+            <div className="w-full lg:w-2/3 xl:w-1/2 flex flex-col gap-6 lg:gap-8">
+              <div className="h-px w-1/3 bg-zinc-800"></div>
+              <p className="text-lg md:text-2xl text-zinc-400 font-editorial italic leading-relaxed">
+                Peluang Indonesia lahir dari potensi yang dimiliki dan kemampuan untuk mengubahnya menjadi nilai di masa depan.
               </p>
             </div>
           </div>
+        </motion.div>
 
-        </div>
-      </section>
-
-
-      {/* OPPORTUNITIES LIST */}
-      <section className="px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-
-          {opportunities.map((item, index) => (
-            <motion.article
-              key={item.number}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-              className="py-20 border-b border-[#F4EFE5]/20"
-            >
-
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-
-                {/* NUMBER */}
-                <div className="md:col-span-1">
-                  <span className="font-mono text-[#F0442E] text-sm">
-                    {item.number}
-                  </span>
-                </div>
-
-
-                {/* TITLE + DESCRIPTION */}
-                <div className="md:col-span-5">
-                  <h2 className="font-['Bebas_Neue'] text-5xl md:text-7xl uppercase leading-none">
-                    {item.title}
-                  </h2>
-
-                  <p className="mt-8 text-lg text-[#9A968E] leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-
-
-                {/* PAST */}
-                <div className="md:col-span-3">
-                  <p className="font-mono text-xs text-[#F0442E] tracking-widest mb-4">
-                    PAST
-                  </p>
-
-                  <h3 className="text-xl font-semibold mb-3">
-                    {item.past.title}
-                  </h3>
-
-                  <p className="text-[#9A968E] leading-relaxed">
-                    {item.past.text}
-                  </p>
-                </div>
-
-
-                {/* PRESENT */}
-                <div className="md:col-span-3">
-                  <p className="font-mono text-xs text-[#F0442E] tracking-widest mb-4">
-                    PRESENT
-                  </p>
-
-                  <h3 className="text-xl font-semibold mb-3">
-                    {item.present.title}
-                  </h3>
-
-                  <p className="text-[#9A968E] leading-relaxed">
-                    {item.present.text}
-                  </p>
-                </div>
-
-              </div>
-
-
-              {/* SOURCE */}
-              {item.source && (
-                <div className="mt-10 md:ml-[8.33%]">
-                  <a
-                    href={item.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-[#F4EFE5] hover:text-[#F0442E] transition-colors"
-                  >
-                    SOURCE ↗
-                  </a>
-                </div>
-              )}
-
-            </motion.article>
+        {/* Content Section */}
+        <div className="flex flex-col w-full">
+          {mappedOpportunities.map((topic, index) => (
+            <TopicCard key={topic.id} topic={topic} index={index} />
           ))}
-
         </div>
-      </section>
-
-
-      {/* CLOSING */}
-      <section className="px-6 md:px-12 lg:px-20 py-32">
-        <div className="max-w-7xl mx-auto">
-
-          <p className="font-mono text-xs text-[#F0442E] tracking-widest mb-6">
-            THE QUESTION
-          </p>
-
-          <h2 className="font-['Bebas_Neue'] text-5xl md:text-8xl uppercase leading-none max-w-5xl">
-            Bisakah peluang menjadi kekuatan nyata?
-          </h2>
-
-        </div>
-      </section>
-
-    </main>
+      </div>
+    </div>
   );
-}
+};
 
 export default Opportunities;

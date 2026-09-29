@@ -1,18 +1,25 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const closeMenu = () => setMobileMenuOpen(false)
+  const location = useLocation()
 
   const navLinks = [
     { name: 'BERANDA', to: '/' },
-    { name: 'ANALISIS', to: '/strengths' },
+    { name: 'ANALISIS', to: '/strengths', aliases: ['/weaknesses', '/opportunities', '/threats'] },
     { name: 'TIMELINE', to: '/timeline' },
     { name: 'KONEKSI', to: '/connections' },
     { name: 'SUMBER', to: '/sources' },
   ]
+
+  const checkIsActive = (link, navLinkIsActive) => {
+    if (navLinkIsActive) return true;
+    if (link.aliases && link.aliases.includes(location.pathname)) return true;
+    return false;
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#111111]/95 backdrop-blur-md border-b border-white/10">
@@ -39,7 +46,7 @@ export default function Navbar() {
                 to={link.to}
                 className={({ isActive }) =>
                   `text-xs uppercase tracking-[0.2em] font-mono transition-colors relative py-1 ${
-                    isActive
+                    checkIsActive(link, isActive)
                       ? 'text-white font-bold'
                       : 'text-[#9A968E] hover:text-[#F4EFE5] font-medium'
                   }`
@@ -47,7 +54,7 @@ export default function Navbar() {
               >
                 {({ isActive }) => (
                   <span className="flex items-center gap-1.5">
-                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#F0442E]" />}
+                    {checkIsActive(link, isActive) && <span className="w-1.5 h-1.5 rounded-full bg-[#F0442E]" />}
                     {link.name}
                   </span>
                 )}
@@ -96,7 +103,7 @@ export default function Navbar() {
                 onClick={closeMenu}
                 className={({ isActive }) =>
                   `flex items-center justify-between py-2 text-2xl font-display tracking-wider transition-colors ${
-                    isActive ? 'text-[#F0442E]' : 'text-[#F4EFE5]'
+                    checkIsActive(link, isActive) ? 'text-[#F0442E]' : 'text-[#F4EFE5]'
                   }`
                 }
               >

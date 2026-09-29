@@ -1,26 +1,41 @@
+import { motion } from "framer-motion";
 import TimelineComponent from "../components/interactive/Timeline";
 
 function TimelinePage() {
   return (
-    <main className="bg-[#111111] text-[#F4EFE5] min-h-screen">
-      <section className="px-6 md:px-12 lg:px-20 py-24 min-h-[60vh] flex flex-col justify-center">
-        <p className="text-[#F0442E] font-mono text-sm mb-6">
-          INDONESIA / TIMELINE
-        </p>
+    <main className="bg-[#111111] text-[#F4EFE5] min-h-screen pt-32 pb-32">
+      <div className="editorial-container">
+        
+        {/* Header Section */}
+        <motion.section 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="mb-32 md:mb-48 relative border-b border-zinc-800/50 pb-16"
+        >
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            <p className="text-[#F0442E] font-bold tracking-[0.4em] text-xs sm:text-sm md:text-base uppercase mb-6 md:mb-10">
+              INDONESIA / TIMELINE
+            </p>
 
-        <h1 className="font-['Bebas_Neue'] text-[16vw] leading-[0.75] uppercase">
-          Timeline
-        </h1>
+            <h1 className="font-display text-[6rem] sm:text-[8rem] md:text-[11rem] lg:text-[13rem] leading-[0.75] uppercase text-white mb-10">
+              TIMELINE
+            </h1>
 
-        <p className="max-w-xl ml-auto mt-12 text-[#9A968E]">
-          Beberapa peristiwa dan perubahan yang membantu memahami perjalanan
-          Indonesia dari masa lalu menuju kondisi saat ini.
-        </p>
-      </section>
+            <div className="h-px w-24 bg-[#F0442E] mb-8"></div>
+            
+            <p className="text-lg md:text-2xl text-zinc-400 font-editorial italic leading-relaxed max-w-2xl">
+              Beberapa peristiwa dan perubahan yang membantu memahami perjalanan
+              Indonesia dari masa lalu menuju kondisi saat ini.
+            </p>
+          </div>
+        </motion.section>
 
-      <section className="px-6 md:px-12 lg:px-20 py-24">
-        <TimelineComponent />
-      </section>
+        {/* Content Section */}
+        <section className="w-full">
+          <TimelineComponent />
+        </section>
+      </div>
     </main>
   );
 }

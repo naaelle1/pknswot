@@ -2,12 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { strengths } from '../data/strengths';
 import TopicCard from '../components/swot/TopicCard';
+import AnalysisNav from '../components/swot/AnalysisNav';
 
 const Strengths = () => {
   return (
     <div className="min-h-screen bg-[#111111] text-[#F4EFE5] pt-32 pb-32">
       <div className="editorial-container">
         
+        <AnalysisNav />
+
         {/* Header Section */}
         <motion.div 
           initial={{ opacity: 0 }}

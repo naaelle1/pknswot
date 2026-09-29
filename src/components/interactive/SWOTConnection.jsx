@@ -24,10 +24,10 @@ function SWOTConnection() {
       {connections.map((item, index) => (
         <motion.div
           key={item.strength}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
           className="border-t border-[#9A968E]/30 py-8"
         >
           <div className="grid md:grid-cols-12 items-center gap-4">

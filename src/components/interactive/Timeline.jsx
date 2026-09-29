@@ -49,8 +49,8 @@ function Timeline() {
               opacity: 1,
               x: 0
             }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className={`relative grid md:grid-cols-2 ${
               index % 2 === 0 ? "" : "md:text-right"
             }`}
