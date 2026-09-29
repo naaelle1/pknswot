@@ -5,6 +5,10 @@ import Footer from './components/layout/Footer'
 import Home from './pages/Home'
 import Strengths from './pages/Strengths'
 import Weaknesses from './pages/Weaknesses'
+import Opportunities from './pages/Opportunities'
+import Threats from './pages/Threats'
+import Timeline from './pages/Timeline'
+import Connections from './pages/Connections'
 import { ArrowLeft, Clock, Info } from 'lucide-react'
 
 // ScrollToTop on route change
@@ -17,8 +21,7 @@ function ScrollToTop() {
 }
 
 /**
- * Dark Poster Placeholder Component for Routes belonging to Person 2 and Person 3 that are not yet implemented.
- * Kept inline inside App.jsx to avoid modifying or creating external files owned by other teammates.
+ * Placeholder for any remaining routes not yet implemented (e.g. Sources).
  */
 function RoutePlaceholder({ title, category, owner, description }) {
   return (
@@ -76,11 +79,9 @@ export default function App() {
             {/* Person 1 Main Page */}
             <Route path="/" element={<Home />} />
 
-            {/* Person 2 Pages (Active) */}
+            {/* Person 2 Pages */}
             <Route path="/strengths" element={<Strengths />} />
             <Route path="/weaknesses" element={<Weaknesses />} />
-
-            {/* Person 2 / 3 Placeholders (Until Implemented) */}
             <Route
               path="/sources"
               element={
@@ -92,50 +93,12 @@ export default function App() {
                 />
               }
             />
-            <Route
-              path="/opportunities"
-              element={
-                <RoutePlaceholder
-                  title="PELUANG (OPPORTUNITIES)"
-                  category="03 / FAKTOR EKSTERNAL POSITIF"
-                  owner="Person 3 (Opportunities.jsx)"
-                  description="Kajian terperinci mengenai hilirisasi mineral kritis, transisi energi baru terbarukan, dan diplomasi regional."
-                />
-              }
-            />
-            <Route
-              path="/threats"
-              element={
-                <RoutePlaceholder
-                  title="ANCAMAN (THREATS)"
-                  category="04 / FAKTOR EKSTERNAL NEGATIF"
-                  owner="Person 3 (Threats.jsx)"
-                  description="Kajian terperinci mengenai risiko perubahan iklim kepulauan, friksi geopolitik, dan ancaman siber."
-                />
-              }
-            />
-            <Route
-              path="/timeline"
-              element={
-                <RoutePlaceholder
-                  title="LINTAS WAKTU (TIMELINE)"
-                  category="05 / KRONOLOGI HISTORIS & VISI 2045"
-                  owner="Person 3 (Timeline.jsx)"
-                  description="Kronologi interaktif perjalanan bangsa dari titik tolak sejarah hingga visi Indonesia 2045."
-                />
-              }
-            />
-            <Route
-              path="/connections"
-              element={
-                <RoutePlaceholder
-                  title="KETERKAITAN ANTARFAKTOR"
-                  category="06 / RELASI SILANG S-W-O-T"
-                  owner="Person 3 (Connections.jsx)"
-                  description="Matriks interaktif analisis relasi silang antara kekuatan, kelemahan, peluang, dan ancaman."
-                />
-              }
-            />
+
+            {/* Person 3 Pages */}
+            <Route path="/opportunities" element={<Opportunities />} />
+            <Route path="/threats" element={<Threats />} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="/connections" element={<Connections />} />
 
             {/* Fallback 404 Route */}
             <Route
