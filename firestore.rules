@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /opinions/{opinionId} {
+      // Allow public read access to opinions
+      allow read: if true;
+
+      // Allow public creation with strict validation rules
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.content is string
+                    && request.resource.data.category is string
+                    && request.resource.data.name.size() <= 40
+                    && request.resource.data.content.size() <= 500
+                    && request.resource.data.category in ['Refleksi', 'Kekuatan', 'Kelemahan', 'Peluang', 'Ancaman', 'Umum']
+                    && request.resource.data.createdAt == request.time;
+
+      // Prevent public modification or deletion
+      allow update, delete: if false;
+    }
+  }
+}

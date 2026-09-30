@@ -12,8 +12,6 @@ export default function Navbar() {
     { name: 'TIMELINE', to: '/timeline' },
     { name: 'KONEKSI', to: '/connections' },
     { name: 'SUMBER', to: '/sources' },
-    { name: 'FORUM', to: '/forum' },
-    
   ]
 
   return (
@@ -28,7 +26,7 @@ export default function Navbar() {
             aria-label="INDONESIA - Beranda"
           >
             <span className="font-display text-2xl sm:text-3xl tracking-wider text-[#F4EFE5] group-hover:text-[#F0442E] transition-colors">
-              Kelompok 5
+              INDONESIA
             </span>
             <span className="text-[#F0442E] text-lg font-serif">✦</span>
           </Link>
@@ -57,7 +55,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Action / CTA */}
+          {/* Action / CTA -> Suara Publik */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
               to="/forum"
@@ -113,7 +111,7 @@ export default function Navbar() {
                 onClick={closeMenu}
                 className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#F0442E] text-white text-xs font-sans font-bold uppercase tracking-widest hover:bg-[#F4EFE5] hover:text-[#111111] transition-colors"
               >
-                <span>BUKA FORUM SUARA PUBLIK</span>
+                <span>BUKA SUARA PUBLIK</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>

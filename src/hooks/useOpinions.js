@@ -13,35 +13,29 @@ export function useOpinions() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    try {
-      const opinionsQuery = query(
-        collection(db, 'opinions'),
-        orderBy('createdAt', 'desc')
-      )
+    const opinionsQuery = query(
+      collection(db, 'opinions'),
+      orderBy('createdAt', 'desc')
+    )
 
-      const unsubscribe = onSnapshot(
-        opinionsQuery,
-        (snapshot) => {
-          const data = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          setOpinions(data)
-          setLoading(false)
-        },
-        (err) => {
-          console.error('Failed to fetch opinions:', err)
-          setError(err)
-          setLoading(false)
-        }
-      )
+    const unsubscribe = onSnapshot(
+      opinionsQuery,
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        setOpinions(data)
+        setLoading(false)
+      },
+      (err) => {
+        console.error('Failed to fetch opinions from Firestore:', err)
+        setError(err)
+        setLoading(false)
+      }
+    )
 
-      return () => unsubscribe()
-    } catch (err) {
-      console.error('Firestore initialization error:', err)
-      setError(err)
-      setLoading(false)
-    }
+    return () => unsubscribe()
   }, [])
 
   return { opinions, loading, error }

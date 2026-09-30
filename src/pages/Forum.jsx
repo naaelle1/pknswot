@@ -1,55 +1,52 @@
+import { useState } from 'react'
 import { useOpinions } from '../hooks/useOpinions'
+import FloatingBackground from '../components/forum/FloatingBackground'
+import ForumHeader from '../components/forum/ForumHeader'
+import FloatingOpinions from '../components/forum/FloatingOpinions'
 import SubmissionForm from '../components/forum/SubmissionForm'
-import OpinionList from '../components/forum/OpinionList'
-import { MessageCircle } from 'lucide-react'
+import { Plus } from 'lucide-react'
 
 export default function Forum() {
   const { opinions, loading, error } = useOpinions()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <div className="w-full min-h-screen bg-[#111111] text-[#F4EFE5] pt-12 sm:pt-20 pb-24 sm:pb-36">
-      <div className="editorial-container">
-        {/* Header Section */}
-        <section className="pb-12 sm:pb-16 mb-16 border-b border-white/20">
-          <div className="flex items-center gap-3 text-xs font-mono tracking-[0.3em] uppercase text-[#F0442E] mb-6 font-bold">
-            <MessageCircle className="w-4 h-4" />
-            <span>FORUM PARTISIPATIF</span>
-          </div>
+    <div className="relative min-h-screen bg-[#080808] text-[#F4EFE5] pt-10 sm:pt-16 pb-24 sm:pb-36 overflow-x-hidden">
+      {/* Dark Background Atmosphere */}
+      <FloatingBackground />
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-            <div>
-              <h1 className="font-display text-6xl sm:text-8xl lg:text-9xl text-[#F4EFE5] tracking-wider leading-[0.88] uppercase">
-                SUARA PUBLIK
-              </h1>
-              <p className="font-editorial text-2xl sm:text-3xl text-[#F0442E] italic mt-3">
-                "Bagaimana kamu melihat Indonesia di persimpangan ini?"
-              </p>
-            </div>
+      <div className="editorial-container relative z-10">
+        {/* Header */}
+        <ForumHeader
+          count={opinions.length}
+          onOpenModal={() => setIsModalOpen(true)}
+        />
 
-            <div className="max-w-md lg:text-right">
-              <p className="font-sans text-xs sm:text-sm text-[#9A968E] leading-relaxed">
-                Ruang terbuka bagi setiap warga dan pelajar untuk menyampaikan aspirasi, telaah SWOT, serta harapan bagi arah bangsa menuju 2045.
-              </p>
-              <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-[#171717] border border-white/20 text-[11px] font-mono text-[#F4EFE5]">
-                <span className="w-2 h-2 rounded-full bg-[#F0442E] animate-pulse" />
-                <span>{opinions.length} Pendapat Tersimpan </span>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Floating Opinions Canvas */}
+        <FloatingOpinions
+          opinions={opinions}
+          loading={loading}
+          error={error}
+        />
+      </div>
 
-        {/* Main Content Grid: Form (Left) & Opinions (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Form */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28">
-            <SubmissionForm />
-          </div>
+      {/* Central Submission Modal */}
+      <SubmissionForm
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
 
-          {/* Right Column: Realtime Opinion Stream */}
-          <div className="lg:col-span-7">
-            <OpinionList opinions={opinions} loading={loading} error={error} />
-          </div>
-        </div>
+      {/* Sticky Floating Trigger for Mobile */}
+      <div className="fixed bottom-6 right-6 z-40 sm:hidden">
+        <button
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center gap-2 px-5 py-3 rounded-full bg-[#F0442E] text-white font-mono text-xs uppercase tracking-widest font-bold shadow-[0_8px_25px_rgba(240,68,46,0.4)] cursor-pointer"
+          aria-label="Tulis Pendapat Baru"
+        >
+          <Plus className="w-4 h-4" />
+          <span>TULIS PENDAPAT</span>
+        </button>
       </div>
     </div>
   )

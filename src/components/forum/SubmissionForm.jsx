@@ -1,29 +1,49 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../lib/firebase'
-import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { X, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../ui/Button'
 
-const CATEGORIES = ['Umum', 'Kekuatan', 'Kelemahan', 'Peluang', 'Ancaman']
+const CATEGORIES = ['Refleksi', 'Kekuatan', 'Kelemahan', 'Peluang', 'Ancaman', 'Umum']
 
-export default function SubmissionForm() {
+function generateArchiveId() {
+  const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ'
+  let result = ''
+  for (let i = 0; i < 4; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return `VOL-${result}`
+}
+
+export default function SubmissionForm({ isOpen, onClose }) {
   const [name, setName] = useState('')
   const [content, setContent] = useState('')
-  const [category, setCategory] = useState('Umum')
+  const [category, setCategory] = useState('Refleksi')
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose])
 
   async function handleSubmit(e) {
     e.preventDefault()
     setErrorMsg('')
     setSuccess(false)
 
-    const cleanName = name.trim()
+    const cleanName = name.trim() || 'Anonim'
     const cleanContent = content.trim()
 
-    if (!cleanName || !cleanContent) {
-      setErrorMsg('Nama/alias dan isi pendapat wajib diisi.')
+    if (!cleanContent) {
+      setErrorMsg('Isi pendapat wajib diisi.')
       return
     }
 
@@ -39,153 +59,208 @@ export default function SubmissionForm() {
 
     setSubmitting(true)
 
+    // Timeout protection
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(
+        () =>
+          reject(
+            new Error(
+              'Koneksi melebihi batas waktu (timeout). Pastikan koneksi internet aktif.'
+            )
+          ),
+        8000
+      )
+    )
+
     try {
-      await addDoc(collection(db, 'opinions'), {
+      const addDocPromise = addDoc(collection(db, 'opinions'), {
         name: cleanName,
         content: cleanContent,
         category,
+        archiveId: generateArchiveId(),
         createdAt: serverTimestamp(),
       })
 
+      await Promise.race([addDocPromise, timeoutPromise])
+
       setName('')
       setContent('')
-      setCategory('Umum')
+      setCategory('Refleksi')
       setSuccess(true)
 
-      // Auto-hide success message after 4s
-      setTimeout(() => setSuccess(false), 4000)
+      setTimeout(() => {
+        setSuccess(false)
+        onClose()
+      }, 1500)
     } catch (err) {
       console.error('Failed to submit opinion:', err)
-      setErrorMsg('Gagal mengirim pendapat. Periksa koneksi internet atau coba lagi.')
+      const message =
+        err?.code === 'permission-denied'
+          ? 'Izin ditolak oleh aturan database Firestore. Pastikan aturan keamanan sudah diizinkan.'
+          : err?.message || 'Gagal mengirim pendapat. Periksa koneksi internet Anda.'
+      setErrorMsg(message)
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <div className="bg-[#171717] border border-white/20 p-6 sm:p-10 relative">
-      <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/15">
-        <div>
-          <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#F0442E] block mb-1 font-bold">
-            PARTISIPASI PUBLIK
-          </span>
-          <h3 className="font-display text-4xl sm:text-5xl text-[#F4EFE5] tracking-wider leading-none">
-            KIRIM PENDAPAT
-          </h3>
-        </div>
-        <span className="font-mono text-xs text-[#9A968E] uppercase tracking-widest hidden sm:inline">
-          KOLOM DISKUSI
-        </span>
-      </div>
-
-      {success && (
-        <div className="mb-6 p-4 bg-[#F0442E]/10 border border-[#F0442E] text-[#F4EFE5] flex items-center gap-3 text-xs font-mono">
-          <CheckCircle2 className="w-5 h-5 text-[#F0442E] shrink-0" />
-          <span>Pendapatmu telah berhasil dikirim ke forum publik!</span>
-        </div>
-      )}
-
-      {errorMsg && (
-        <div className="mb-6 p-4 bg-red-950/40 border border-red-500 text-red-200 flex items-center gap-3 text-xs font-mono">
-          <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
-          <span>{errorMsg}</span>
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name / Alias Input */}
-        <div>
-          <div className="flex justify-between items-center mb-2">
-            <label
-              htmlFor="name"
-              className="text-xs font-mono uppercase tracking-widest text-[#F4EFE5] font-bold"
-            >
-              Nama / Alias <span className="text-[#F0442E]">*</span>
-            </label>
-            <span className="text-[10px] font-mono text-[#9A968E]">
-              {name.length}/40
-            </span>
-          </div>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            maxLength={40}
-            placeholder="Contoh: Budi (Pelajar) / Warga Nusantara"
-            className="w-full bg-[#111111] border border-white/20 focus:border-[#F0442E] focus:outline-none text-[#F4EFE5] p-3.5 text-sm font-sans placeholder-[#9A968E]/60 transition-colors"
-            required
-            disabled={submitting}
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/85 backdrop-blur-sm"
           />
-        </div>
 
-        {/* SWOT Category Selection */}
-        <div>
-          <label className="text-xs font-mono uppercase tracking-widest text-[#F4EFE5] font-bold block mb-2">
-            Kategori Terkait
-          </label>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-            {CATEGORIES.map((cat) => {
-              const isSelected = category === cat
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setCategory(cat)}
-                  disabled={submitting}
-                  className={`py-2.5 px-3 text-xs font-mono uppercase tracking-wider border transition-all cursor-pointer ${
-                    isSelected
-                      ? 'bg-[#F0442E] text-white border-[#F0442E] font-bold'
-                      : 'bg-[#111111] text-[#9A968E] border-white/15 hover:border-white hover:text-[#F4EFE5]'
-                  }`}
-                >
-                  {cat}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Content / Opinion Textarea */}
-        <div>
-          <div className="flex justify-between items-center mb-2">
-            <label
-              htmlFor="content"
-              className="text-xs font-mono uppercase tracking-widest text-[#F4EFE5] font-bold"
-            >
-              Isi Pandangan / Pendapat <span className="text-[#F0442E]">*</span>
-            </label>
-            <span className="text-[10px] font-mono text-[#9A968E]">
-              {content.length}/500
-            </span>
-          </div>
-          <textarea
-            id="content"
-            rows={5}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            maxLength={500}
-            placeholder="Bagikan pandanganmu mengenai kekuatan, kelemahan, peluang, atau ancaman bagi masa depan Indonesia..."
-            className="w-full bg-[#111111] border border-white/20 focus:border-[#F0442E] focus:outline-none text-[#F4EFE5] p-3.5 text-sm font-sans placeholder-[#9A968E]/60 transition-colors resize-none leading-relaxed"
-            required
-            disabled={submitting}
-          />
-        </div>
-
-        {/* Submit Button */}
-        <div className="pt-2">
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            disabled={submitting}
-            icon={Send}
-            className="w-full justify-center"
+          {/* Modal Panel */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            transition={{ duration: 0.2 }}
+            className="relative z-10 w-full max-w-xl max-h-[90vh] overflow-y-auto bg-[#111111] border border-white/20 p-5 sm:p-8 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.9)]"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
           >
-            {submitting ? 'MENGIRIM PENDAPAT...' : 'KIRIM KE FORUM'}
-          </Button>
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 text-[#9A968E] hover:text-[#F4EFE5] hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Tutup formulir"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Header */}
+            <div className="pr-8 mb-6 sm:mb-8">
+              <h2
+                id="modal-title"
+                className="font-editorial text-2xl sm:text-4xl text-[#F4EFE5] font-normal leading-tight"
+              >
+                Tulis Pendapatmu
+              </h2>
+              <p className="font-sans text-xs sm:text-sm text-[#9A968E] mt-1.5 sm:mt-2">
+                Bagikan pandanganmu tentang Indonesia.
+              </p>
+            </div>
+
+            {/* Alerts */}
+            {success && (
+              <div className="mb-5 p-3.5 bg-[#F0442E]/10 border border-[#F0442E] text-[#F4EFE5] flex items-center gap-2.5 text-xs font-mono">
+                <CheckCircle2 className="w-4 h-4 text-[#F0442E] shrink-0" />
+                <span>Pendapatmu sudah masuk.</span>
+              </div>
+            )}
+
+            {errorMsg && (
+              <div className="mb-5 p-3.5 bg-red-950/40 border border-red-500 text-red-200 flex items-start gap-2.5 text-xs font-mono">
+                <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                <span className="leading-relaxed">{errorMsg}</span>
+              </div>
+            )}
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                {/* Name / Alias Input */}
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label
+                      htmlFor="form-name"
+                      className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#9A968E] font-bold"
+                    >
+                      NAMA / ANONIM
+                    </label>
+                    <span className="text-[10px] font-mono text-[#9A968E]/60">
+                      {name.length}/40
+                    </span>
+                  </div>
+                  <input
+                    id="form-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    maxLength={40}
+                    placeholder="Anonim"
+                    className="w-full bg-[#171717] border border-white/20 focus:border-[#F0442E] focus:outline-none text-[#F4EFE5] p-2.5 sm:p-3 text-xs font-sans placeholder-[#9A968E]/50 transition-colors"
+                    disabled={submitting}
+                  />
+                </div>
+
+                {/* Topic / Category Selection */}
+                <div>
+                  <label
+                    htmlFor="form-category"
+                    className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#9A968E] font-bold block mb-1"
+                  >
+                    TOPIK
+                  </label>
+                  <select
+                    id="form-category"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    disabled={submitting}
+                    className="w-full bg-[#171717] border border-white/20 focus:border-[#F0442E] focus:outline-none text-[#F4EFE5] p-2.5 sm:p-3 text-xs font-sans transition-colors cursor-pointer"
+                  >
+                    {CATEGORIES.map((cat) => (
+                      <option key={cat} value={cat} className="bg-[#171717] text-[#F4EFE5]">
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Textarea Content */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label
+                    htmlFor="form-content"
+                    className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#9A968E] font-bold"
+                  >
+                    PENDAPAT <span className="text-[#F0442E]">*</span>
+                  </label>
+                  <span className="text-[10px] font-mono text-[#9A968E]">
+                    {content.length}/500
+                  </span>
+                </div>
+                <textarea
+                  id="form-content"
+                  rows={4}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  maxLength={500}
+                  placeholder="Tulis pendapatmu di sini..."
+                  className="w-full bg-[#171717] border border-white/20 focus:border-[#F0442E] focus:outline-none text-[#F4EFE5] p-3 text-xs sm:text-sm font-sans placeholder-[#9A968E]/50 transition-colors resize-none leading-relaxed"
+                  required
+                  disabled={submitting}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-1">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="md"
+                  disabled={submitting}
+                  icon={Send}
+                  className="w-full justify-center py-3"
+                >
+                  {submitting ? 'MENGIRIM PENDAPAT...' : 'KIRIM PENDAPAT'}
+                </Button>
+              </div>
+            </form>
+          </motion.div>
         </div>
-      </form>
-    </div>
+      )}
+    </AnimatePresence>
   )
 }
