@@ -1,25 +1,20 @@
 import { useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const closeMenu = () => setMobileMenuOpen(false)
-  const location = useLocation()
 
   const navLinks = [
     { name: 'BERANDA', to: '/' },
-    { name: 'ANALISIS', to: '/strengths', aliases: ['/weaknesses', '/opportunities', '/threats'] },
+    { name: 'ANALISIS', to: '/strengths' },
     { name: 'TIMELINE', to: '/timeline' },
     { name: 'KONEKSI', to: '/connections' },
     { name: 'SUMBER', to: '/sources' },
+    { name: 'FORUM', to: '/forum' },
+    
   ]
-
-  const checkIsActive = (link, navLinkIsActive) => {
-    if (navLinkIsActive) return true;
-    if (link.aliases && link.aliases.includes(location.pathname)) return true;
-    return false;
-  }
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#111111]/95 backdrop-blur-md border-b border-white/10">
@@ -33,20 +28,20 @@ export default function Navbar() {
             aria-label="INDONESIA - Beranda"
           >
             <span className="font-display text-2xl sm:text-3xl tracking-wider text-[#F4EFE5] group-hover:text-[#F0442E] transition-colors">
-              INDONESIA
+              Kelompok 5
             </span>
             <span className="text-[#F0442E] text-lg font-serif">✦</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10" aria-label="Navigasi Utama">
+          <nav className="hidden md:flex items-center gap-7 lg:gap-9" aria-label="Navigasi Utama">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
                   `text-xs uppercase tracking-[0.2em] font-mono transition-colors relative py-1 ${
-                    checkIsActive(link, isActive)
+                    isActive
                       ? 'text-white font-bold'
                       : 'text-[#9A968E] hover:text-[#F4EFE5] font-medium'
                   }`
@@ -54,7 +49,7 @@ export default function Navbar() {
               >
                 {({ isActive }) => (
                   <span className="flex items-center gap-1.5">
-                    {checkIsActive(link, isActive) && <span className="w-1.5 h-1.5 rounded-full bg-[#F0442E]" />}
+                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#F0442E]" />}
                     {link.name}
                   </span>
                 )}
@@ -65,10 +60,10 @@ export default function Navbar() {
           {/* Action / CTA */}
           <div className="hidden sm:flex items-center gap-4">
             <Link
-              to="/strengths"
+              to="/forum"
               className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#F0442E] text-white hover:bg-[#F4EFE5] hover:text-[#111111] text-xs font-sans font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer"
             >
-              <span>JELAJAHI</span>
+              <span>SUARA PUBLIK</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -103,7 +98,7 @@ export default function Navbar() {
                 onClick={closeMenu}
                 className={({ isActive }) =>
                   `flex items-center justify-between py-2 text-2xl font-display tracking-wider transition-colors ${
-                    checkIsActive(link, isActive) ? 'text-[#F0442E]' : 'text-[#F4EFE5]'
+                    isActive ? 'text-[#F0442E]' : 'text-[#F4EFE5]'
                   }`
                 }
               >
@@ -114,11 +109,11 @@ export default function Navbar() {
 
             <div className="pt-4 border-t border-white/10">
               <Link
-                to="/strengths"
+                to="/forum"
                 onClick={closeMenu}
                 className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#F0442E] text-white text-xs font-sans font-bold uppercase tracking-widest hover:bg-[#F4EFE5] hover:text-[#111111] transition-colors"
               >
-                <span>MULAI EKSPLORASI</span>
+                <span>BUKA FORUM SUARA PUBLIK</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>

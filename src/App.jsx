@@ -9,6 +9,7 @@ import Opportunities from './pages/Opportunities'
 import Threats from './pages/Threats'
 import Timeline from './pages/Timeline'
 import Connections from './pages/Connections'
+import Forum from './pages/Forum'
 import { ArrowLeft, Clock, Info } from 'lucide-react'
 
 // ScrollToTop on route change
@@ -21,7 +22,7 @@ function ScrollToTop() {
 }
 
 /**
- * Placeholder for any remaining routes not yet implemented (e.g. Sources).
+ * Dark Poster Placeholder Component for Routes that are not yet implemented.
  */
 function RoutePlaceholder({ title, category, owner, description }) {
   return (
@@ -99,6 +100,9 @@ export default function App() {
             <Route path="/threats" element={<Threats />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/connections" element={<Connections />} />
+
+            {/* Public Interactive Forum */}
+            <Route path="/forum" element={<Forum />} />
 
             {/* Fallback 404 Route */}
             <Route

@@ -23,10 +23,10 @@ export default function Footer() {
 
           <div>
             <Link
-              to="/strengths"
+              to="/forum"
               className="inline-flex items-center gap-3 px-8 py-4 bg-[#F0442E] text-white text-xs font-sans font-bold uppercase tracking-widest hover:bg-[#F4EFE5] hover:text-[#111111] transition-colors"
             >
-              <span>JELAJAHI ANALISIS</span>
+              <span>BUKA FORUM PUBLIK</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
@@ -83,6 +83,11 @@ export default function Footer() {
               <li>
                 <Link to="/connections" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
                   KETERKAITAN
+                </Link>
+              </li>
+              <li>
+                <Link to="/forum" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors font-bold">
+                  FORUM PUBLIK
                 </Link>
               </li>
             </ul>
