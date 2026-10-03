@@ -10,6 +10,7 @@ import Threats from './pages/Threats'
 import Timeline from './pages/Timeline'
 import Connections from './pages/Connections'
 import Forum from './pages/Forum'
+import Sources from './pages/Sources'
 import { ArrowLeft, Clock, Info } from 'lucide-react'
 
 // ScrollToTop on route change
@@ -83,17 +84,7 @@ export default function App() {
             {/* Person 2 Pages */}
             <Route path="/strengths" element={<Strengths />} />
             <Route path="/weaknesses" element={<Weaknesses />} />
-            <Route
-              path="/sources"
-              element={
-                <RoutePlaceholder
-                  title="DAFTAR SUMBER & REFERENSI"
-                  category="04 / BIBLIOGRAFI & ARSIP DATA"
-                  owner="Person 2 (Sources.jsx)"
-                  description="Kompilasi dokumen resmi, jurnal ilmiah, dan data statistik terpercaya."
-                />
-              }
-            />
+            <Route path="/sources" element={<Sources />} />
 
             {/* Person 3 Pages */}
             <Route path="/opportunities" element={<Opportunities />} />
