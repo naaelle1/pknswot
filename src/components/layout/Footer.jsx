@@ -7,118 +7,123 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full bg-[#111111] text-[#F4EFE5] border-t border-white/20 mt-32">
-      <div className="editorial-container py-16 sm:py-24">
-        {/* Massive Headline */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-white/20">
-          <div>
-            <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#F0442E] block mb-3 font-bold">
-              INDONESIA / 2026
-            </span>
-            <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl tracking-wider text-[#F4EFE5] leading-none uppercase">
-              DI PERSIMPANGAN <br />
-              <span className="font-serif italic text-[#F0442E] lowercase text-5xl sm:text-7xl lg:text-8xl">nusantara</span>
-            </h2>
+    <footer className="w-full bg-[#111111] text-[#F4EFE5] border-t border-white/15 mt-24">
+      <div className="editorial-container">
+
+        {/* Main */}
+        <div className="py-12 sm:py-16">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+
+            {/* Identity */}
+            <div className="max-w-xl">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="flex items-center justify-center w-9 h-9 bg-[#F0442E] text-white font-mono text-sm font-bold">
+                  05
+                </span>
+
+                <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#9A968E]">
+                  Kelompok 5 / PKN
+                </span>
+              </div>
+
+              <h2 className="font-display text-4xl sm:text-6xl uppercase leading-[0.9] tracking-tight">
+                Indonesia
+                <br />
+                <span className="font-serif italic font-normal text-[#F0442E]">
+                  di persimpangan.
+                </span>
+              </h2>
+
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-[#F4EFE5]/60">
+                Website interaktif untuk melihat kekuatan, kelemahan,
+                peluang, dan ancaman Indonesia dari berbagai sudut pandang.
+              </p>
+            </div>
+
+            {/* Navigation */}
+            <div className="grid grid-cols-2 gap-x-12 gap-y-8 text-xs font-mono">
+              <div>
+                <span className="block mb-3 text-[#9A968E] uppercase tracking-widest">
+                  Analisis
+                </span>
+
+                <div className="flex flex-col gap-2">
+                  <Link to="/strengths" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Kekuatan
+                  </Link>
+
+                  <Link to="/weaknesses" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Kelemahan
+                  </Link>
+
+                  <Link to="/opportunities" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Peluang
+                  </Link>
+
+                  <Link to="/threats" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Ancaman
+                  </Link>
+                </div>
+              </div>
+
+              <div>
+                <span className="block mb-3 text-[#9A968E] uppercase tracking-widest">
+                  Eksplorasi
+                </span>
+
+                <div className="flex flex-col gap-2">
+                  <Link to="/timeline" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Linimasa
+                  </Link>
+
+                  <Link to="/connections" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Keterkaitan
+                  </Link>
+
+                  <Link to="/sources" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors">
+                    Sumber
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <Link
-              to="/forum"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#F0442E] text-white text-xs font-sans font-bold uppercase tracking-widest hover:bg-[#F4EFE5] hover:text-[#111111] transition-colors"
-            >
-              <span>BUKA FORUM PUBLIK</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+          {/* Bottom */}
+          <div className="mt-12 pt-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-mono uppercase tracking-widest text-[#68655F]">
+              <span>PKN</span>
+              <span>•</span>
+              <span>XII SIJA 2</span>
+              <span>•</span>
+              <span>SMK Negeri 7 Semarang</span>
+              <span>•</span>
+              <span>2026</span>
+            </div>
+
+            <div className="flex items-center gap-5 text-[10px] font-mono uppercase tracking-widest">
+
+              <Link
+                to="/"
+                className="flex items-center gap-1 text-[#9A968E] hover:text-white transition-colors"
+              >
+                Beranda
+                <ArrowUpRight className="w-3 h-3" />
+              </Link>
+
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="group flex items-center gap-1.5 text-[#9A968E] hover:text-white transition-colors cursor-pointer"
+              >
+                Atas
+                <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
+              </button>
+
+            </div>
           </div>
         </div>
 
-        {/* Directory Matrix */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-white/10 text-xs font-mono">
-          <div>
-            <span className="text-[10px] uppercase tracking-widest text-[#9A968E] block mb-4">
-              01 / ANALISIS
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/strengths" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  01 KEKUATAN
-                </Link>
-              </li>
-              <li>
-                <Link to="/weaknesses" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  02 KELEMAHAN
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <span className="text-[10px] uppercase tracking-widest text-[#9A968E] block mb-4">
-              02 / DINAMIKA
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/opportunities" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  03 PELUANG
-                </Link>
-              </li>
-              <li>
-                <Link to="/threats" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  04 ANCAMAN
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <span className="text-[10px] uppercase tracking-widest text-[#9A968E] block mb-4">
-              03 / EKSPLORASI
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/timeline" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  LINIMASA
-                </Link>
-              </li>
-              <li>
-                <Link to="/connections" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  KETERKAITAN
-                </Link>
-              </li>
-              <li>
-                <Link to="/forum" className="text-[#F4EFE5]/70 hover:text-[#F0442E] transition-colors font-bold">
-                  FORUM PUBLIK
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <span className="text-[10px] uppercase tracking-widest text-[#9A968E] block mb-4">
-              04 / DATA
-            </span>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/sources" className="text-[#F4EFE5]/70 hover:text-white transition-colors">
-                  SUMBER
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-[#9A968E]">
-          <span>INDONESIA — KAJIAN STRATEGIS PKN.</span>
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"
-          >
-            <span>KEMBALI KE ATAS</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
-        </div>
       </div>
     </footer>
   )

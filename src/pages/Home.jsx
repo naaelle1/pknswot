@@ -129,7 +129,7 @@ export default function Home() {
             <SWOTCard
               code="01"
               category="Strengths"
-              title="KEKUATAN"
+              title="STRENGTHS"
               subtitle="MODAL DASAR YANG SUDAH DIMILIKI"
               statement="Modal geostrategis, keanekaragaman hayati, dan bonus usia produktif."
               to="/strengths"
@@ -138,7 +138,7 @@ export default function Home() {
             <SWOTCard
               code="02"
               category="Weaknesses"
-              title="KELEMAHAN"
+              title="WEAKNESSES"
               subtitle="FAKTOR INTERNAL YANG MENGHAMBAT"
               statement="Kesenjangan antarpulau, mutu SDM, dan tata kelola institusi."
               to="/weaknesses"
@@ -147,7 +147,7 @@ export default function Home() {
             <SWOTCard
               code="03"
               category="Opportunities"
-              title="PELUANG"
+              title="OPPORTUNITIES"
               subtitle="RUANG POTENSIAL UNTUK MELOMPAT"
               statement="Hilirisasi mineral energi bersih global dan akselerasi ekonomi digital."
               to="/opportunities"
@@ -156,7 +156,7 @@ export default function Home() {
             <SWOTCard
               code="04"
               category="Threats"
-              title="ANCAMAN"
+              title="THREATS"
               subtitle="TEKANAN EKSTERNAL YANG MENGINTAI"
               statement="Krisis iklim pesisir, friksi geopolitik kawasan, dan risiko keamanan siber."
               to="/threats"
