@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { weaknesses } from '../data/weaknesses';
 import TopicCard from '../components/swot/TopicCard';
 import AnalysisNav from '../components/swot/AnalysisNav';
 
 const Weaknesses = () => {
+  const [expandedId, setExpandedId] = useState(null);
+
+  const handleToggleExpand = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
+
   return (
     <div className="min-h-screen bg-[#111111] text-[#F4EFE5] pt-32 pb-32">
       <div className="editorial-container">
@@ -42,7 +48,13 @@ const Weaknesses = () => {
         {/* Content Section */}
         <div className="flex flex-col w-full">
           {weaknesses.map((topic, index) => (
-            <TopicCard key={topic.id} topic={topic} index={index} />
+            <TopicCard 
+              key={topic.id} 
+              topic={topic} 
+              index={index} 
+              expandedId={expandedId}
+              onToggleExpand={handleToggleExpand}
+            />
           ))}
         </div>
       </div>

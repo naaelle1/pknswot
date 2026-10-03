@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import opportunities from '../data/opportunities';
 import TopicCard from '../components/swot/TopicCard';
 import AnalysisNav from '../components/swot/AnalysisNav';
 
 const Opportunities = () => {
+  const [expandedId, setExpandedId] = useState(null);
+
+  const handleToggleExpand = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
+
   // Map the local opportunities data structure to match what TopicCard expects
   const mappedOpportunities = opportunities.map((item) => {
     let sourceName = "Sumber Eksternal";
@@ -16,6 +22,8 @@ const Opportunities = () => {
       id: parseInt(item.number, 10),
       title: item.title,
       description: item.description,
+      image: item.image,
+      marqueeText: item.marqueeText,
       past: {
         title: item.past.title,
         description: item.past.text
@@ -70,7 +78,13 @@ const Opportunities = () => {
         {/* Content Section */}
         <div className="flex flex-col w-full">
           {mappedOpportunities.map((topic, index) => (
-            <TopicCard key={topic.id} topic={topic} index={index} />
+            <TopicCard 
+              key={topic.id} 
+              topic={topic} 
+              index={index} 
+              expandedId={expandedId}
+              onToggleExpand={handleToggleExpand}
+            />
           ))}
         </div>
       </div>

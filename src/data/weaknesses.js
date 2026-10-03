@@ -1,8 +1,14 @@
+import w1 from '../assets/analysis/strengths/weakness/weakness-01.webp';
+import w2 from '../assets/analysis/strengths/weakness/weakness-02.webp';
+import w3 from '../assets/analysis/strengths/weakness/weakness-03.webp';
+
 export const weaknesses = [
   {
     id: 1,
     title: "Korupsi dan Penyalahgunaan Wewenang",
     description: "Korupsi menjadi tantangan karena dapat merugikan keuangan negara dan mengurangi kepercayaan masyarakat terhadap lembaga pemerintahan.",
+    image: w1,
+    marqueeText: "KORUPSI & PENYALAHGUNAAN WEWENANG — TANTANGAN TATA KELOLA",
     past: {
       title: "Kasus Bank Century",
       description: "Pada 2014, Budi Mulya divonis 10 tahun penjara dalam perkara korupsi terkait pemberian fasilitas pendanaan kepada Bank Century."
@@ -26,6 +32,8 @@ export const weaknesses = [
     id: 2,
     title: "Ketimpangan Pendidikan",
     description: "Pendidikan di Indonesia belum sepenuhnya merata karena fasilitas, akses internet, dan kualitas pembelajaran masih berbeda antarwilayah.",
+    image: w2,
+    marqueeText: "KETIMPANGAN PENDIDIKAN — KESENJANGAN AKSES & KUALITAS",
     past: {
       title: "Pembelajaran Jarak Jauh saat Pandemi",
       description: "Pada masa pandemi, pembelajaran jarak jauh memperlihatkan kesenjangan pendidikan. Pemerintah mengakui bahwa PJJ semakin memperlihatkan kesenjangan pendidikan Indonesia."
@@ -49,6 +57,8 @@ export const weaknesses = [
     id: 3,
     title: "Kemiskinan dan Ketimpangan Ekonomi",
     description: "Kemiskinan dan ketimpangan ekonomi menunjukkan bahwa hasil pembangunan belum sepenuhnya dirasakan secara merata oleh seluruh masyarakat.",
+    image: w3,
+    marqueeText: "KEMISKINAN & KETIMPANGAN — TANTANGAN PEMERATAAN EKONOMI",
     past: {
       title: "Krisis Moneter 1997–1998",
       description: "Krisis moneter 1997–1998 menyebabkan perekonomian Indonesia mengalami kemerosotan dan harga kebutuhan pokok meningkat sehingga daya beli masyarakat menurun."

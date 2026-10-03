@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import SourceList from './SourceList';
 
 const cardVariants = {
@@ -32,7 +32,35 @@ const imageReveal = {
   }
 };
 
-const TopicCard = ({ topic, index }) => {
+const MarqueeText = ({ text }) => {
+  const content = `${text} → `;
+  // Repeat enough times to fill the width and loop seamlessly
+  const repeated = content.repeat(8);
+
+  return (
+    <div className="w-full overflow-hidden mt-3">
+      <div
+        className="whitespace-nowrap font-display text-xs sm:text-sm tracking-[0.2em] text-zinc-500 uppercase"
+        style={{
+          animation: 'marquee-scroll 20s linear infinite',
+          width: 'max-content',
+        }}
+      >
+        {repeated}
+      </div>
+    </div>
+  );
+};
+
+const TopicCard = ({ topic, index, expandedId, onToggleExpand }) => {
+  const isExpanded = expandedId === topic.id;
+
+  const handleImageClick = () => {
+    if (onToggleExpand) {
+      onToggleExpand(topic.id);
+    }
+  };
+
   return (
     <motion.div 
       initial="hidden"
@@ -57,21 +85,44 @@ const TopicCard = ({ topic, index }) => {
         {topic.image && (
           <motion.div 
             variants={imageReveal}
-            className="w-full sm:w-[85%] md:w-[75%] xl:w-[90%] max-w-md relative shadow-[6px_6px_0px_#000000] group/image bg-zinc-900 overflow-hidden"
+            className="w-full sm:w-[85%] md:w-[75%] xl:w-[90%] max-w-md flex flex-col"
           >
-            {/* Traveling Orange Outline */}
-            <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_75%,#F0442E_100%)] animate-[spin_8s_linear_infinite] opacity-50 group-hover/image:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-            
-            {/* Inner padding & Image */}
-            <div className="relative m-[1px] p-1.5 bg-[#0a0a0a] z-10 overflow-hidden">
-              <motion.img 
-                src={topic.image} 
-                alt={topic.title} 
-                className="w-full h-auto object-cover opacity-95 group-hover/image:opacity-100 [@media(hover:hover)]:grayscale group-hover/image:grayscale-0 transition-all duration-500"
-                whileHover={{ scale: 1.015 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              />
-            </div>
+            {/* Clickable image container */}
+            <motion.div
+              onClick={handleImageClick}
+              animate={{ scale: isExpanded ? 1.1 : 1 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="relative shadow-[6px_6px_0px_#000000] group/image bg-zinc-900 overflow-hidden cursor-pointer origin-center"
+            >
+              {/* Traveling Orange Outline */}
+              <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_75%,#F0442E_100%)] animate-[spin_8s_linear_infinite] opacity-50 group-hover/image:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+              
+              {/* Inner padding & Image */}
+              <div className="relative m-[1px] p-1.5 bg-[#0a0a0a] z-10 overflow-hidden">
+                <motion.img 
+                  src={topic.image} 
+                  alt={topic.title} 
+                  className="w-full h-auto object-cover opacity-95 group-hover/image:opacity-100 [@media(hover:hover)]:grayscale group-hover/image:grayscale-0 transition-all duration-500"
+                  whileHover={{ scale: 1.015 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Marquee text — only visible when expanded */}
+            <AnimatePresence>
+              {isExpanded && topic.marqueeText && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden"
+                >
+                  <MarqueeText text={topic.marqueeText} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </div>

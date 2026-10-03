@@ -1,3 +1,8 @@
+import o1 from '../assets/analysis/opportunities/opportunities-01.webp';
+import o2 from '../assets/analysis/opportunities/opportunities-02.webp';
+import o3 from '../assets/analysis/opportunities/opportunities-03.webp';
+import o4 from '../assets/analysis/opportunities/opportunities-04.webp';
+
 const opportunities = [
   {
     number: "01",
@@ -5,6 +10,8 @@ const opportunities = [
     shortTitle: "Perdagangan Global",
     description:
       "Posisi geografis, jumlah penduduk, dan sumber daya Indonesia membuka peluang untuk mengembangkan perdagangan, investasi, industri, dan ekonomi digital.",
+    image: o1,
+    marqueeText: "EKONOMI & PERDAGANGAN GLOBAL — PELUANG PASAR INTERNASIONAL",
 
     past: {
       title: "Jalur Perdagangan",
@@ -28,6 +35,8 @@ const opportunities = [
     shortTitle: "Teknologi",
     description:
       "Perkembangan teknologi informasi membuka akses terhadap pengetahuan, keterampilan, komunikasi, dan peluang ekonomi baru.",
+    image: o2,
+    marqueeText: "KEMAJUAN TEKNOLOGI & INFORMASI — TRANSFORMASI DIGITAL",
 
     past: {
       title: "Perkembangan Internet",
@@ -51,6 +60,8 @@ const opportunities = [
     shortTitle: "Pariwisata",
     description:
       "Keberagaman budaya, kesenian, tradisi, kuliner, dan kekayaan alam Indonesia menjadi modal penting bagi pengembangan pariwisata.",
+    image: o3,
+    marqueeText: "PARIWISATA & KEBERAGAMAN BUDAYA — POTENSI WISATA NUSANTARA",
 
     past: {
       title: "Bali & Pariwisata",
@@ -74,6 +85,8 @@ const opportunities = [
     shortTitle: "Sumber Daya Alam",
     description:
       "Kekayaan mineral, energi, pertanian, perkebunan, dan perikanan dapat menjadi modal untuk meningkatkan nilai tambah ekonomi Indonesia.",
+    image: o4,
+    marqueeText: "KEKAYAAN SUMBER DAYA ALAM — HILIRISASI & NILAI TAMBAH",
 
     past: {
       title: "Komoditas Mentah",

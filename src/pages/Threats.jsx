@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import threats from '../data/threats';
 import TopicCard from '../components/swot/TopicCard';
 import AnalysisNav from '../components/swot/AnalysisNav';
 
 const Threats = () => {
+  const [expandedId, setExpandedId] = useState(null);
+
+  const handleToggleExpand = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
+
   const mappedThreats = threats.map((item) => {
     let sourceName = "Sumber Eksternal";
     try {
@@ -15,6 +21,8 @@ const Threats = () => {
       id: parseInt(item.number, 10),
       title: item.title,
       description: item.description,
+      image: item.image,
+      marqueeText: item.marqueeText,
       past: {
         title: item.past.title,
         description: item.past.text
@@ -69,7 +77,13 @@ const Threats = () => {
         {/* Content Section */}
         <div className="flex flex-col w-full">
           {mappedThreats.map((topic, index) => (
-            <TopicCard key={topic.id} topic={topic} index={index} />
+            <TopicCard 
+              key={topic.id} 
+              topic={topic} 
+              index={index} 
+              expandedId={expandedId}
+              onToggleExpand={handleToggleExpand}
+            />
           ))}
         </div>
       </div>
