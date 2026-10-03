@@ -2,29 +2,82 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import SourceList from './SourceList';
 
+const cardVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 25 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
+const imageReveal = {
+  hidden: { opacity: 0, scale: 0.97, y: 12 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
 const TopicCard = ({ topic, index }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      variants={cardVariants}
       className="w-full border-t border-zinc-800 py-16 md:py-28 flex flex-col xl:flex-row gap-12 xl:gap-24 relative group"
     >
-      {/* Number and Title Column */}
-      <div className="w-full xl:w-[45%] flex flex-col md:flex-row gap-6 md:gap-12 items-start relative z-10">
-        <span className="font-display text-[8rem] md:text-[12rem] lg:text-[14rem] leading-[0.75] text-zinc-800 group-hover:text-[#F0442E] transition-colors duration-700 opacity-80 select-none -mt-4">
-          {String(topic.id).padStart(2, '0')}
-        </span>
-        <div className="flex flex-col mt-4 md:mt-8">
-          <h2 className="font-display text-5xl md:text-7xl lg:text-7xl text-white uppercase leading-[0.85] tracking-wide break-words">
-            {topic.title}
-          </h2>
-        </div>
+      {/* Number, Title, and Image Column */}
+      <div className="w-full xl:w-[45%] flex flex-col gap-10 md:gap-16 items-start relative z-10">
+        <motion.div variants={fadeUp} className="flex flex-col md:flex-row gap-6 md:gap-12 items-start w-full">
+          <span className="font-display text-[8rem] md:text-[12rem] lg:text-[14rem] leading-[0.75] text-zinc-800 group-hover:text-[#F0442E] transition-colors duration-700 opacity-80 select-none -mt-4">
+            {String(topic.id).padStart(2, '0')}
+          </span>
+          <div className="flex flex-col mt-4 md:mt-8">
+            <h2 className="font-display text-5xl md:text-7xl lg:text-7xl text-white uppercase leading-[0.85] tracking-wide break-words">
+              {topic.title}
+            </h2>
+          </div>
+        </motion.div>
+
+        {topic.image && (
+          <motion.div 
+            variants={imageReveal}
+            className="w-full sm:w-[85%] md:w-[75%] xl:w-[90%] max-w-md relative shadow-[6px_6px_0px_#000000] group/image bg-zinc-900 overflow-hidden"
+          >
+            {/* Traveling Orange Outline */}
+            <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_75%,#F0442E_100%)] animate-[spin_8s_linear_infinite] opacity-50 group-hover/image:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+            
+            {/* Inner padding & Image */}
+            <div className="relative m-[1px] p-1.5 bg-[#0a0a0a] z-10 overflow-hidden">
+              <motion.img 
+                src={topic.image} 
+                alt={topic.title} 
+                className="w-full h-auto object-cover opacity-95 group-hover/image:opacity-100 [@media(hover:hover)]:grayscale group-hover/image:grayscale-0 transition-all duration-500"
+                whileHover={{ scale: 1.015 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              />
+            </div>
+          </motion.div>
+        )}
       </div>
 
       {/* Content Column */}
-      <div className="w-full xl:w-[55%] flex flex-col gap-12 pt-4 xl:pt-10 z-10">
+      <motion.div variants={fadeUp} className="w-full xl:w-[55%] flex flex-col gap-12 pt-4 xl:pt-10 z-10">
         <p className="text-xl md:text-3xl text-zinc-300 font-editorial italic leading-relaxed">
           "{topic.description}"
         </p>
@@ -64,7 +117,7 @@ const TopicCard = ({ topic, index }) => {
         </div>
 
         <SourceList sources={topic.sources} />
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

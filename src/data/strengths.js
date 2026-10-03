@@ -1,8 +1,15 @@
+import s1 from '../assets/analysis/strengths/STRENGTH-01.webp';
+import s2 from '../assets/analysis/strengths/STRENGTH-02.webp';
+import s3 from '../assets/analysis/strengths/STRENGTH-03.webp';
+import s4 from '../assets/analysis/strengths/STRENGTH-04.webp';
+import s5 from '../assets/analysis/strengths/STRENGTH-05.webp';
+
 export const strengths = [
   {
     id: 1,
     title: "Letak Geografis yang Strategis",
     description: "Indonesia berada di antara Benua Asia dan Australia serta Samudra Hindia dan Pasifik. Posisi ini membuat Indonesia berada pada jalur perdagangan dan pelayaran internasional yang penting.",
+    image: s1,
     past: {
       title: "Perdagangan dan Jalur Rempah",
       description: "Sejak dahulu wilayah Indonesia menjadi jalur perdagangan dan persinggahan pedagang asing karena kekayaan rempah-rempahnya."
@@ -22,6 +29,7 @@ export const strengths = [
     id: 2,
     title: "Kekayaan Sumber Daya Alam",
     description: "Indonesia memiliki sumber daya alam yang melimpah, seperti nikel, batu bara, minyak bumi, gas alam, kelapa sawit, serta hasil pertanian dan perikanan.",
+    image: s2,
     past: {
       title: "Rempah-Rempah Nusantara",
       description: "Indonesia sejak dahulu dikenal sebagai penghasil rempah-rempah seperti pala dan cengkih yang menarik pedagang dari berbagai negara."
@@ -41,6 +49,7 @@ export const strengths = [
     id: 3,
     title: "Keanekaragaman Budaya",
     description: "Indonesia memiliki beragam suku, bahasa, adat istiadat, kesenian, dan tradisi yang menjadi identitas sekaligus kekayaan bangsa.",
+    image: s3,
     past: {
       title: "Warisan Batik",
       description: "Batik telah berkembang dan diwariskan dari generasi ke generasi sebagai bagian dari budaya masyarakat Indonesia."
@@ -60,6 +69,7 @@ export const strengths = [
     id: 4,
     title: "Potensi Kelautan dan Pariwisata",
     description: "Sebagai negara kepulauan, Indonesia memiliki wilayah laut yang luas dan kekayaan alam yang dapat dimanfaatkan untuk perikanan serta pariwisata bahari.",
+    image: s4,
     past: {
       title: "Pemanfaatan Laut Sejak Dahulu",
       description: "Masyarakat Indonesia telah memanfaatkan laut untuk perikanan, pelayaran, dan perdagangan antarpulau sejak dahulu."
@@ -79,6 +89,7 @@ export const strengths = [
     id: 5,
     title: "Jumlah Penduduk dan Pasar yang Besar",
     description: "Jumlah penduduk Indonesia yang besar merupakan kekuatan karena menyediakan tenaga kerja sekaligus menciptakan pasar konsumen yang luas.",
+    image: s5,
     past: {
       title: "Penduduk dan Pusat Ekonomi",
       description: "Jumlah penduduk yang besar telah mendukung kegiatan pertanian, perdagangan, dan perkembangan berbagai pusat ekonomi di Indonesia."
