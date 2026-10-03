@@ -12,36 +12,26 @@ export const groupedSources = [
         id: 1,
         name: "ANTARA",
         url: "https://www.antaranews.com/berita/5517931/prabowo-70-persen-energi-dan-perdagangan-asia-timur-lewat-laut-ri?utm_source=chatgpt.com",
-        image: s1,
-        article: "“Sadar kah kita bahwa 70 persen kebutuhan energinya Asia Timur dan 70 persen perdagangan lewat laut-laut Indonesia. Sadar kah kita bahwa Selat Malaka, Selat Sunda, Selat Makassar dan sebagainya itu laut Indonesia. Sadar kah kita betapa pentingnya Indonesia,” ujar Prabowo."
       },
       {
         id: 2,
         name: "ANTARA",
         url: "https://www.antaranews.com/berita/5454467/kemendag-produk-olahan-sawit-dan-nikel-dongkrak-ekspor-ri?utm_source=chatgpt.com",
-        image: s2,
-        article: "“Tiga komoditas nonmigas utama dengan kenaikan ekspor tertinggi pada Januari 2026 adalah timah dan barang daripadanya yang naik hingga 191,38 persen, lemak dan minyak hewani atau nabati naik 46,05 persen, serta nikel dan barang daripadanya naik 42,04 persen (YoY). Hal ini didorong oleh peningkatan harga ketiga komoditas tersebut di pasar internasional,” kata Budi."
       },
       {
         id: 3,
         name: "ANTARA",
         url: "https://jogja.antaranews.com/berita/832211/komitmen-diy-menjaga-keberlanjutan-batik-sebagai-warisan-budaya?utm_source=chatgpt.com",
-        image: s3,
-        article: "Tanggung jawab tersebut semakin besar setelah Yogyakarta ditetapkan sebagai Kota Batik Dunia oleh World Crafts Council (WCC) pada 2014. Sejak saat itu, berbagai upaya terus dilakukan untuk menjaga keberlanjutan batik sebagai warisan budaya sekaligus sumber penghidupan masyarakat."
       },
       {
         id: 4,
         name: "ANTARA",
         url: "https://www.antaranews.com/berita/4716005/raja-ampat-bangun-konektivitas-dukung-pertumbuhan-ekonomi?utm_source=chatgpt.com",
-        image: s4,
-        article: "Bupati Raja Ampat, Orideko I. Burdam, di Sorong, Senin, menjelaskan, pembukaan konektivitas ini merupakan bagian dari implementasi program 100 hari kerja untuk mendongkrak pertumbuhan ekonomi masyarakat dan sekaligus penguatan di bidang pariwisata."
       },
       {
         id: 5,
         name: "ANTARA",
         url: "https://www.antaranews.com/berita/5471251/dukcapil-penduduk-indonesia-per-desember-2025-capai-2883-juta-jiwa?utm_source=chatgpt.com",
-        image: s5,
-        article: "“Kalau kita melihat usia produktif 69,03 persen, inilah kita bersyukurnya bahwa mungkin sampai dengan 2030-an itulah yang namanya bonus demografi. Tinggal bagaimana kita mengoptimalkan potensi usia produktif tersebut. Ini luar biasa kalau bisa dimaksimalkan,” ucap Teguh."
       }
     ]
   },
