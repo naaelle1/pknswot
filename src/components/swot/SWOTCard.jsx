@@ -17,22 +17,18 @@ export default function SWOTCard({
   const categoryConfig = {
     Strengths: {
       label: 'KEKUATAN',
-      subtitle: 'MODAL DASAR YANG SUDAH DIMILIKI',
       defaultTo: '/strengths',
     },
     Weaknesses: {
       label: 'KELEMAHAN',
-      subtitle: 'FAKTOR INTERNAL YANG MENGHAMBAT',
       defaultTo: '/weaknesses',
     },
     Opportunities: {
       label: 'PELUANG',
-      subtitle: 'RUANG POTENSIAL UNTUK MELOMPAT',
       defaultTo: '/opportunities',
     },
     Threats: {
       label: 'ANCAMAN',
-      subtitle: 'TEKANAN EKSTERNAL YANG MENGINTAI',
       defaultTo: '/threats',
     },
   }
@@ -43,35 +39,37 @@ export default function SWOTCard({
   return (
     <Link
       to={targetLink}
-      className={`group relative block w-full py-8 sm:py-12 px-6 sm:px-12 border-b border-white/20 transition-all duration-200 hover:bg-[#F0442E] hover:text-white ${className}`}
+      className={`group relative block w-full py-5 sm:py-7 lg:py-9 px-3 sm:px-6 lg:px-8 border-b border-white/20 transition-all duration-200 hover:bg-[#F0442E] hover:text-white ${className}`}
     >
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        {/* Left: Code & Massive Display Title */}
-        <div className="flex items-baseline gap-6 sm:gap-12">
-          <span className="font-display text-4xl sm:text-6xl text-[#F0442E] group-hover:text-white transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6">
+        {/* Left: Code & Display Title */}
+        <div className="flex items-center gap-4 sm:gap-8">
+          <span className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#F0442E] group-hover:text-white transition-colors shrink-0">
             {code}
           </span>
 
           <div>
-            <h3 className="font-display text-5xl sm:text-7xl lg:text-8xl tracking-wider text-[#F4EFE5] group-hover:text-white leading-none transition-transform group-hover:translate-x-3 duration-200">
+            <h3 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wider text-[#F4EFE5] group-hover:text-white leading-none transition-transform group-hover:translate-x-1.5 duration-200 break-words">
               {title || config.label}
             </h3>
-            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#9A968E] group-hover:text-white/80 block mt-2">
-              {subtitle || config.subtitle}
-            </span>
+            {subtitle && (
+              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#9A968E] group-hover:text-white/80 block mt-1">
+                {subtitle}
+              </span>
+            )}
           </div>
         </div>
 
         {/* Right: Short statement & Action Arrow */}
-        <div className="flex items-center justify-between lg:justify-end gap-6 sm:gap-12">
+        <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 ml-8 sm:ml-0">
           {statement && (
-            <p className="font-sans text-xs sm:text-sm text-[#9A968E] group-hover:text-white/90 max-w-xs leading-relaxed transition-colors hidden sm:block">
+            <p className="font-sans text-xs sm:text-sm text-[#9A968E] group-hover:text-white/90 max-w-sm leading-relaxed transition-colors">
               {statement}
             </p>
           )}
 
-          <div className="w-14 h-14 rounded-full border border-white/30 group-hover:border-white group-hover:bg-white group-hover:text-[#111111] flex items-center justify-center shrink-0 transition-all duration-200">
-            <ArrowUpRight className="w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full border border-white/30 group-hover:border-white group-hover:bg-white group-hover:text-[#111111] flex items-center justify-center shrink-0 transition-all duration-200">
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </div>
         </div>
       </div>
