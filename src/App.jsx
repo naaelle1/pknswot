@@ -11,6 +11,7 @@ import Timeline from './pages/Timeline'
 import Connections from './pages/Connections'
 import Forum from './pages/Forum'
 import Sources from './pages/Sources'
+import About from './pages/About'
 import { ArrowLeft, Clock, Info } from 'lucide-react'
 
 // ScrollToTop on route change
@@ -94,6 +95,9 @@ export default function App() {
 
             {/* Public Interactive Forum */}
             <Route path="/forum" element={<Forum />} />
+            
+            {/* About Page */}
+            <Route path="/about" element={<About />} />
 
             {/* Fallback 404 Route */}
             <Route

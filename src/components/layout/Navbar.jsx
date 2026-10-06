@@ -19,6 +19,7 @@ export default function Navbar() {
     { name: 'TIMELINE', to: '/timeline', number: '03' },
     { name: 'KONEKSI', to: '/connections', number: '04' },
     { name: 'SUMBER', to: '/sources', number: '05' },
+    { name: 'ABOUT US', to: '/about', number: '06' },
   ]
 
   return (
