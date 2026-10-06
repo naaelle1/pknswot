@@ -39,7 +39,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-9" aria-label="Navigasi Utama">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-7 xl:gap-9" aria-label="Navigasi Utama">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
