@@ -67,16 +67,16 @@ const TopicCard = ({ topic, index, expandedId, onToggleExpand }) => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={cardVariants}
-      className="w-full border-t border-zinc-800 py-16 md:py-28 flex flex-col xl:flex-row gap-12 xl:gap-24 relative group"
+      className="w-full border-t border-zinc-800 py-10 sm:py-16 md:py-24 flex flex-col xl:flex-row gap-8 sm:gap-12 xl:gap-24 relative group"
     >
       {/* Number, Title, and Image Column */}
-      <div className="w-full xl:w-[45%] flex flex-col gap-10 md:gap-16 items-start relative z-10">
-        <motion.div variants={fadeUp} className="flex flex-col md:flex-row gap-6 md:gap-12 items-start w-full">
-          <span className="font-display text-[8rem] md:text-[12rem] lg:text-[14rem] leading-[0.75] text-zinc-800 group-hover:text-[#F0442E] transition-colors duration-700 opacity-80 select-none -mt-4">
+      <div className="w-full xl:w-[45%] flex flex-col gap-8 sm:gap-10 md:gap-16 items-start relative z-10">
+        <motion.div variants={fadeUp} className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-12 items-start w-full">
+          <span className="font-display text-[clamp(4.5rem,18vw,14rem)] leading-[0.75] text-zinc-800 group-hover:text-[#F0442E] transition-colors duration-700 opacity-80 select-none -mt-2 sm:-mt-4">
             {String(topic.id).padStart(2, '0')}
           </span>
-          <div className="flex flex-col mt-4 md:mt-8">
-            <h2 className="font-display text-5xl md:text-7xl lg:text-7xl text-white uppercase leading-[0.85] tracking-wide break-words">
+          <div className="flex flex-col mt-2 sm:mt-4 md:mt-8">
+            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white uppercase leading-[0.85] tracking-wide break-words">
               {topic.title}
             </h2>
           </div>

@@ -57,7 +57,7 @@ export default function Home() {
         <div className="editorial-container w-full my-auto py-6 sm:py-10 lg:py-14">
           <div className="relative">
             {/* Red Graphic Star Element */}
-            <div className="absolute -top-4 sm:-top-10 lg:-top-16 right-0 sm:right-8 lg:right-12 z-0 pointer-events-none opacity-85">
+            <div className="absolute -top-3 sm:-top-10 lg:-top-16 right-0 sm:right-8 lg:right-12 z-0 pointer-events-none opacity-80 sm:opacity-85">
               <svg
                 viewBox="0 0 100 100"
                 className="w-12 h-12 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 fill-[#F0442E]"
@@ -68,12 +68,26 @@ export default function Home() {
             </div>
 
             <div className="relative z-10">
-              <motion.h1
+              {/* Intentional Eyebrow on Mobile & Desktop */}
+              <motion.div
                 initial="hidden"
                 animate="visible"
                 custom={0}
                 variants={fadeIn}
-                className="font-display text-[clamp(2.75rem,11vw,11.5rem)] font-normal leading-[0.88] tracking-tight uppercase text-[#F4EFE5] select-none break-words"
+                className="flex items-center gap-2 mb-2 sm:mb-4"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F0442E]" />
+                <span className="font-mono text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-[#F0442E]">
+                  INDONESIA
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                custom={0.05}
+                variants={fadeIn}
+                className="font-display text-[clamp(2.5rem,10.5vw,11.5rem)] font-normal leading-[0.88] tracking-tight uppercase text-[#F4EFE5] select-none break-words"
               >
                 DI PERSIMPANGAN
               </motion.h1>
@@ -84,7 +98,7 @@ export default function Home() {
                   animate="visible"
                   custom={0.15}
                   variants={fadeIn}
-                  className="font-editorial italic text-[clamp(3.25rem,13vw,12.5rem)] font-normal leading-[0.84] tracking-tight text-[#F0442E] select-none lowercase"
+                  className="font-editorial italic text-[clamp(3rem,12.5vw,12.5rem)] font-normal leading-[0.84] tracking-tight text-[#F0442E] select-none lowercase"
                 >
                   nusantara
                 </motion.span>
@@ -94,7 +108,7 @@ export default function Home() {
                   animate="visible"
                   custom={0.25}
                   variants={fadeIn}
-                  className="sm:text-right max-w-xs sm:max-w-md sm:mb-3 mt-1 sm:mt-0"
+                  className="sm:text-right max-w-xs sm:max-w-md sm:mb-3 mt-2 sm:mt-0"
                 >
                   <p className="font-sans text-xs sm:text-sm text-[#F4EFE5]/85 leading-relaxed">
                     Analisis kekuatan, kelemahan, peluang, dan ancaman Indonesia.

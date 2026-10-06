@@ -35,13 +35,12 @@ export default function Footer() {
               </h2>
 
               <p className="mt-6 max-w-md text-sm leading-relaxed text-[#F4EFE5]/60">
-                Website interaktif untuk melihat kekuatan, kelemahan,
-                peluang, dan ancaman Indonesia dari berbagai sudut pandang.
+                Melihat yang kuat. Membaca yang lemah. Menemukan peluang. Menghadapi ancaman.
               </p>
             </div>
 
             {/* Navigation */}
-            <div className="grid grid-cols-2 gap-x-12 gap-y-8 text-xs font-mono">
+            <div className="grid grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-8 text-xs font-mono">
               <div>
                 <span className="block mb-3 text-[#9A968E] uppercase tracking-widest">
                   Analisis

@@ -18,14 +18,14 @@ const AnalysisNav = () => {
           ANALYSIS
         </span>
         
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`group flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] transition-all duration-300 ${
+                className={`group flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-300 ${
                   isActive 
                     ? 'text-[#F0442E]' 
                     : 'text-zinc-500 hover:text-zinc-300'

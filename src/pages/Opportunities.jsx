@@ -42,7 +42,7 @@ const Opportunities = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#F4EFE5] pt-32 pb-32">
+    <div className="min-h-screen bg-[#111111] text-[#F4EFE5] pt-20 sm:pt-28 md:pt-32 pb-20 sm:pb-32">
       <div className="editorial-container">
 
         <AnalysisNav />
@@ -52,23 +52,23 @@ const Opportunities = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="mb-32 md:mb-48 relative"
+          className="mb-16 sm:mb-28 md:mb-40 relative"
         >
           {/* Decorative background element */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#F0442E] opacity-[0.03] rounded-full blur-[100px] pointer-events-none"></div>
 
-          <div className="flex flex-col gap-12 lg:gap-16 relative z-10 border-b border-zinc-800/50 pb-16">
+          <div className="flex flex-col gap-8 sm:gap-12 lg:gap-16 relative z-10 border-b border-zinc-800/50 pb-12 sm:pb-16">
             <div className="w-full">
-              <h4 className="text-[#F0442E] font-bold tracking-[0.4em] text-sm md:text-base uppercase mb-6 md:mb-10">
+              <h4 className="text-[#F0442E] font-bold tracking-[0.3em] sm:tracking-[0.4em] text-xs sm:text-sm md:text-base uppercase mb-4 sm:mb-8">
                 Analisis Eksternal
               </h4>
-              <h1 className="font-display text-[4.5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] xl:text-[13rem] 2xl:text-[14rem] leading-[0.75] uppercase text-white -ml-2">
+              <h1 className="font-display text-[clamp(2.35rem,9.5vw,12.5rem)] leading-[0.8] uppercase text-white -ml-1 sm:-ml-2 break-words select-none">
                 OPPORTUNITIES
               </h1>
             </div>
             <div className="w-full lg:w-2/3 xl:w-1/2 flex flex-col gap-6 lg:gap-8">
               <div className="h-px w-1/3 bg-zinc-800"></div>
-              <p className="text-lg md:text-2xl text-zinc-400 font-editorial italic leading-relaxed">
+              <p className="text-base sm:text-xl md:text-2xl text-zinc-400 font-editorial italic leading-relaxed">
                 Peluang Indonesia lahir dari potensi yang dimiliki dan kemampuan untuk mengubahnya menjadi nilai di masa depan.
               </p>
             </div>
